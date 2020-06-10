@@ -1,2 +1,6 @@
-﻿  Unit.cpp
-  Projekt.vcxproj -> C:\c\Projekt-Karol2\Projekt-master\proj\Projekt\x64\Debug\Projekt.exe
+﻿  Map.cpp
+D:\c\proj-master\proj\Projekt\Projekt\Map.cpp(16,32): warning C4244: "argument": konwersja z "double" do "int", możliwa utrata danych
+D:\c\proj-master\proj\Projekt\Projekt\Map.cpp(27,32): warning C4244: "argument": konwersja z "double" do "int", możliwa utrata danych
+D:\c\proj-master\proj\Projekt\Projekt\Map.cpp(96,18): warning C4244: "inicjowanie": konwersja z "double" do "int", możliwa utrata danych
+D:\c\proj-master\proj\Projekt\Projekt\Map.cpp(135,19): warning C4244: "inicjowanie": konwersja z "double" do "int", możliwa utrata danych
+  Projekt.vcxproj -> D:\c\proj-master\proj\Projekt\x64\Debug\Projekt.exe

@@ -14,7 +14,7 @@ int main()
     map.setmonsters();
     map.place(map.x, map.y,0,0 );
     map.draw();
-    while(true)
+    while(!map.areMonstersAlive()&&!map.areSoldiersAlive())
     {
         map.moveunits(map.x, map.y, 0, 0);
         cout << endl;

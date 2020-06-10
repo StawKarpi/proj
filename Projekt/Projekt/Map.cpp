@@ -49,9 +49,7 @@ void Map::place(int x, int y, int xpos, int ypos)
 	for (int i = 0; i < monsters.size(); i++)
 	{
 		monsters[i]->setFirstX(x);
-		//cout << "monster x: " << monsters[i].getxpos() + 1 << endl;
 		monsters[i]->setFirstY(y);
-		//cout << "monster y: " << y - monsters[i].getypos() << endl;
 		for (int j = 0;j < soldiers.size();j++)
 		{
 			if ((monsters[i]->getXpos() == soldiers[j]->getXpos()) && (monsters[i]->getYpos() == soldiers[j]->getYpos()))
@@ -78,11 +76,21 @@ void Map::draw()
 	}
 }
 
+bool Map::areMonstersAlive()
+{
+	return monsters.empty();
+}
+
+bool Map::areSoldiersAlive()
+{
+	return soldiers.empty();
+}
+
 void Map::moveunits(int x, int y, int xpos, int ypos)
 {
 	for (int i = 0;i < soldiers.size();i++)
 	{
-		int dist=100, idmonster;
+		int dist=1000, idmonster;
 		for (int j = 0;j < monsters.size();j++)
 		{
 			int dist_temp = sqrt(pow((soldiers[i]->getXpos() - monsters[j]->getXpos()), 2) + pow((soldiers[i]->getYpos() - monsters[j]->getYpos()), 2));
@@ -93,10 +101,19 @@ void Map::moveunits(int x, int y, int xpos, int ypos)
 			}
 			
 		}
-		if ((dist == 1) && (soldiers[i]->getXpos() == monsters[idmonster]->getXpos() || soldiers[i]->getYpos() == monsters[i]->getYpos()))
+		if ((dist == 1) && (soldiers[i]->getXpos() == monsters[idmonster]->getXpos() || soldiers[i]->getYpos() == monsters[idmonster]->getYpos()))
 		{
 			soldiers[i]->attack(monsters[idmonster]);
 			cout << monsters[idmonster]->getPoint() << ": " << monsters[idmonster]->getHealth() << endl;
+			if (monsters[idmonster]->getHealth() <= 0)
+			{
+				map[monsters[idmonster]->getYpos()][monsters[idmonster]->getXpos()] = '-';
+				monsters.erase(monsters.begin() + idmonster);
+				if (monsters.empty())
+				{
+					break;
+				}
+			}
 		}
 		else
 		{
@@ -112,7 +129,7 @@ void Map::moveunits(int x, int y, int xpos, int ypos)
 	}
 	for (int i = 0;i < monsters.size();i++)
 	{
-		int distm = 100, idsoldier=0;
+		int distm = 1000, idsoldier=0;
 		for (int j = 0;j < soldiers.size();j++)
 		{
 			int distm_temp = sqrt(pow((monsters[i]->getXpos() - soldiers[j]->getXpos()), 2) + pow((monsters[i]->getYpos() - soldiers[j]->getYpos()), 2));
@@ -123,9 +140,18 @@ void Map::moveunits(int x, int y, int xpos, int ypos)
 			}
 
 		}
-		if ((distm == 1) && (monsters[i]->getXpos() == soldiers[idsoldier]->getXpos() || monsters[i]->getYpos() == soldiers[i]->getYpos()))
+		if ((distm == 1) && (monsters[i]->getXpos() == soldiers[idsoldier]->getXpos() || monsters[i]->getYpos() == soldiers[idsoldier]->getYpos()))
 		{
 			monsters[i]->attack(soldiers[idsoldier]);
+			if (soldiers[idsoldier]->getHealth() <= 0)
+			{
+				map[soldiers[idsoldier]->getYpos()][soldiers[idsoldier]->getXpos()] = '-';
+				soldiers.erase(soldiers.begin() + idsoldier);
+				if (soldiers.empty())
+				{
+					break;
+				}
+			}
 		}
 		else
 		{

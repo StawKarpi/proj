@@ -28,6 +28,8 @@ using namespace std;
 		void setmonsters();
 		void place(int x, int y, int xpos, int ypos);
 		void draw();
+		bool areMonstersAlive();
+		bool areSoldiersAlive();
 		void moveunits(int x, int y, int xpos, int ypos);
 	};
 

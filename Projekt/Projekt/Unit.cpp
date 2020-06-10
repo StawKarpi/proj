@@ -6,6 +6,7 @@ Unit::Unit(int xpos, int ypos, char point, int health, int strength)
 	this->ypos = ypos;
 	this->point = point;
 	this->health = health;
+	this->strength = strength;
 }
 
 void Unit::setFirstX(int x)
@@ -43,6 +44,11 @@ int Unit::getHealth()
 	return health;
 }
 
+int Unit::getStrength()
+{
+	return strength;
+}
+
 int Unit::getXpos()
 {
 	return xpos;
@@ -60,5 +66,8 @@ char Unit::getPoint()
 
 void Unit::attack(Unit* unit)
 {
-	unit->health--;
+	if (unit->getHealth() > 0)
+	{
+		unit->setHealth(unit->getHealth() - strength);
+	}
 }

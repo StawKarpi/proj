@@ -21,6 +21,7 @@ public:
 	void setPoint(char);
 	void setHealth(int);
 	int getHealth();
+	int getStrength();
 	void attack(Unit*);
 	int getXpos();
 	int getYpos();
